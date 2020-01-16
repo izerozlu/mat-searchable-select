@@ -1,0 +1,20 @@
+<form class="search-form" autocomplete="off">
+	<mat-form-field class="search-form__form-field form-field" floatLabel="never">
+		<mat-label>
+			<ng-content select="searchable-select-search-label"></ng-content>
+		</mat-label>
+		<input class="search-form__input"
+			   autofocus
+			   type="text"
+			   matInput
+			   [formControl]="searchControl"
+			   (keydown)="$event.stopPropagation()">
+		<clear-button class="form-field__cleaning-button"
+					  matSuffix
+					  *ngIf="!isLoading && searchControl.value"
+					  [control]="searchControl">
+		</clear-button>
+		<mat-icon class="form-field__loading-indicator mat-primary" *ngIf="isLoading" matSuffix>filter_tilt_shift
+		</mat-icon>
+	</mat-form-field>
+</form>

@@ -1,0 +1,6 @@
+<mat-list class="searchable-select__list">
+	<mat-list-item class="searchable-select__option" *ngFor="let option of options"
+				   (click)="handleItemSelection(option)">
+		<ng-container *ngTemplateOutlet="templateRef; context: {option: option || {}}"></ng-container>
+	</mat-list-item>
+</mat-list>

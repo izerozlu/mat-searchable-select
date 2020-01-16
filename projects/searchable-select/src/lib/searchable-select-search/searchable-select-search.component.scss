@@ -1,0 +1,54 @@
+:host {
+	display: block;
+	height: 100%;
+	color: black;
+	padding: 0 16px;
+}
+
+.search-form {
+	height: 100%;
+}
+
+.search-form__form-field {
+	display: inline;
+
+	::ng-deep {
+		.mat-form-field-wrapper {
+			height: 85%;
+
+			.mat-form-field-infix {
+				padding: 0;
+				border-top: 10px solid rgba(0, 0, 0, 0);
+			}
+
+			.mat-form-field-flex {
+				position: relative;
+			}
+		}
+	}
+}
+
+.search-form__input {
+	height: 32px;
+}
+
+
+.form-field__loading-indicator {
+	animation-iteration-count: infinite;
+	animation-name: spin;
+	animation-timing-function: ease-out;
+	animation-duration: 1s;
+	position: absolute;
+	right: 0;
+	bottom: -2px;
+	height: 28px;
+}
+
+@keyframes spin {
+	from {
+		transform: rotate(0);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}

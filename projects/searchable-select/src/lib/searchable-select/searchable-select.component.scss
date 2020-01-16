@@ -1,0 +1,18 @@
+:host {
+	min-height: 60px;
+}
+
+.searchable-select__hidden-option {
+	display: none;
+}
+
+.searhable-select-panel {
+	background: black;
+}
+
+::ng-deep {
+	.searhable-select-panel {
+		overflow: hidden !important;
+		max-height: unset !important;
+	}
+}
