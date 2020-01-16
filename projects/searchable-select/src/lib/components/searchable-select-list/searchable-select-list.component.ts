@@ -11,7 +11,7 @@ import {
 	TemplateRef,
 	ViewEncapsulation
 } from '@angular/core';
-import {SearchableSelectOptionDirective} from '../searchable-select-option.directive';
+import {SearchableSelectOptionDirective} from '../../directives/searchable-select-option.directive';
 
 @Component({
 	selector: 'searchable-select-list',
@@ -22,13 +22,20 @@ import {SearchableSelectOptionDirective} from '../searchable-select-option.direc
 export class SearchableSelectListComponent implements OnChanges, AfterViewInit {
 	@ContentChild(SearchableSelectOptionDirective, {static: false}) private searchableSelectOptionDirective: SearchableSelectOptionDirective;
 
-	@Input('options') public options: any[];
-	@Input('option-keys') public optionKeys: string | string[];
-	@Input('option-separator') public optionSeparator = ' ';
+	public searchQuery: string;
+	public options: any[];
 
 	@Output('item-selected') public itemSelected = new EventEmitter<any>();
 
 	public templateRef: TemplateRef<any>;
+	public isHighlightEnabled: boolean;
+	@Input('option-keys') private optionKeys: string | string[];
+
+	@Input('options')
+	set optionsSetter(options: any[]) {
+		this.options = [];
+		setTimeout(() => this.options = options);
+	}
 
 	constructor(
 		private hostElementRef: ElementRef

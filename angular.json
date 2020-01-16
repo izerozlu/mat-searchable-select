@@ -7,7 +7,6 @@
 			"projectType": "library",
 			"root": "projects/searchable-select",
 			"sourceRoot": "projects/searchable-select/src",
-			"prefix": "lib",
 			"architect": {
 				"build": {
 					"builder": "@angular-devkit/build-ng-packagr:build",

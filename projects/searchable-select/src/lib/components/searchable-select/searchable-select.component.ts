@@ -15,7 +15,7 @@ import {FormControl} from '@angular/forms';
 import {MatOption} from '@angular/material';
 import {filter, first} from 'rxjs/operators';
 import {SearchableSelectListComponent} from '../searchable-select-list/searchable-select-list.component';
-import {SearchableSelectOptionDirective} from '../searchable-select-option.directive';
+import {SearchableSelectOptionDirective} from '../../directives/searchable-select-option.directive';
 import {BehaviorSubject} from 'rxjs';
 
 @Component({
@@ -29,6 +29,11 @@ export class SearchableSelectComponent implements OnInit, AfterViewInit, OnChang
 	@ContentChild(SearchableSelectListComponent, {static: false}) private searchableSelectList: SearchableSelectListComponent;
 	@ContentChild(SearchableSelectOptionDirective, {static: false}) private searchableSelectOptionDirective: SearchableSelectOptionDirective;
 
+	@Input('highlight')
+	set highlightSetter(value: boolean) {
+		setTimeout(() => this.searchableSelectList.isHighlightEnabled = value !== false);
+	}
+
 	@Input('control') public control: FormControl;
 	@Input('value') public value: any;
 	@Input('is-loading') public isLoading: boolean;
@@ -41,14 +46,16 @@ export class SearchableSelectComponent implements OnInit, AfterViewInit, OnChang
 	public searchFormControl = new FormControl(undefined);
 
 	private itemSelecting = new BehaviorSubject(false);
-	private _value: any;
 
 	constructor() {
 	}
 
 	public ngOnInit() {
 		this.searchFormControl.valueChanges.pipe(filter((query: string) => query === '' || (query && query.length >= 3)))
-			.subscribe((queryString: string) => this.searchChangedEventEmitter.emit(queryString));
+			.subscribe((queryString: string) => {
+				this.searchChangedEventEmitter.emit(queryString);
+				this.searchableSelectList.searchQuery = queryString;
+			});
 	}
 
 	public ngAfterViewInit() {

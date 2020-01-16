@@ -2,7 +2,7 @@
 	<mat-label>
 		<ng-content select="searchable-select-label"></ng-content>
 	</mat-label>
-	<mat-select class="searchable-select" [formControl]="control" panelClass="searhable-select-panel"
+	<mat-select [formControl]="control" class="searchable-select" panelClass="searchable-select-panel"
 				(opened)="handleMatSelectOpened()">
 		<mat-option class="searchable-select__hidden-option" #hiddenOption [value]="selectedItem">
 			<ng-container *ngTemplateOutlet="optionTemplateRef; context: {option: selectedItem || {}}"></ng-container>

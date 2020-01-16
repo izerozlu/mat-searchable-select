@@ -6,12 +6,8 @@
 	display: none;
 }
 
-.searhable-select-panel {
-	background: black;
-}
-
 ::ng-deep {
-	.searhable-select-panel {
+	.searchable-select-panel {
 		overflow: hidden !important;
 		max-height: unset !important;
 	}
