@@ -11,16 +11,17 @@ import {
 	TemplateRef,
 	ViewEncapsulation
 } from '@angular/core';
-import {SearchableSelectOptionDirective} from '../../directives/searchable-select-option.directive';
+import {MatSearchableSelectOptionDirective} from '../../directives/mat-searchable-select-option.directive';
 
 @Component({
-	selector: 'searchable-select-list',
-	templateUrl: './searchable-select-list.component.html',
-	styleUrls: ['./searchable-select-list.component.scss'],
+	selector: 'mat-searchable-select-list',
+	templateUrl: './mat-searchable-select-list.component.html',
+	styleUrls: ['./mat-searchable-select-list.component.scss'],
 	encapsulation: ViewEncapsulation.None
 })
-export class SearchableSelectListComponent implements OnChanges, AfterViewInit {
-	@ContentChild(SearchableSelectOptionDirective, {static: false}) private searchableSelectOptionDirective: SearchableSelectOptionDirective;
+export class MatSearchableSelectListComponent implements OnChanges, AfterViewInit {
+	@ContentChild(MatSearchableSelectOptionDirective, {static: false})
+	private searchableSelectOptionDirective: MatSearchableSelectOptionDirective;
 
 	public searchQuery: string;
 	public options: any[];
@@ -62,8 +63,8 @@ export class SearchableSelectListComponent implements OnChanges, AfterViewInit {
 
 	private calculateListHeight() {
 		const hostElement: HTMLElement = this.hostElementRef.nativeElement;
-		const matListElement: HTMLElement = hostElement.querySelector('.searchable-select__list');
-		const matListItemElement: HTMLElement = matListElement.querySelector('.searchable-select__option');
+		const matListElement: HTMLElement = hostElement.querySelector('.mat-searchable-select__list');
+		const matListItemElement: HTMLElement = matListElement.querySelector('.mat-searchable-select__option');
 		matListElement.style.maxHeight = `${(matListItemElement ? matListItemElement.clientHeight || 48 : 48) * 5}px`;
 	}
 

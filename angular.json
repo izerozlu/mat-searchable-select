@@ -3,24 +3,24 @@
 	"version": 1,
 	"newProjectRoot": "projects",
 	"projects": {
-		"searchable-select": {
+		"mat-searchable-select": {
 			"projectType": "library",
-			"root": "projects/searchable-select",
-			"sourceRoot": "projects/searchable-select/src",
+			"root": "projects/mat-searchable-select",
+			"sourceRoot": "projects/mat-searchable-select/src",
 			"architect": {
 				"build": {
 					"builder": "@angular-devkit/build-ng-packagr:build",
 					"options": {
-						"tsConfig": "projects/searchable-select/tsconfig.lib.json",
-						"project": "projects/searchable-select/ng-package.json"
+						"tsConfig": "projects/mat-searchable-select/tsconfig.lib.json",
+						"project": "projects/mat-searchable-select/ng-package.json"
 					}
 				},
 				"lint": {
 					"builder": "@angular-devkit/build-angular:tslint",
 					"options": {
 						"tsConfig": [
-							"projects/searchable-select/tsconfig.lib.json",
-							"projects/searchable-select/tsconfig.spec.json"
+							"projects/mat-searchable-select/tsconfig.lib.json",
+							"projects/mat-searchable-select/tsconfig.spec.json"
 						],
 						"exclude": [
 							"**/node_modules/**"
@@ -30,5 +30,5 @@
 			}
 		}
 	},
-	"defaultProject": "my-lib"
+	"defaultProject": "mat-searchable-select"
 }

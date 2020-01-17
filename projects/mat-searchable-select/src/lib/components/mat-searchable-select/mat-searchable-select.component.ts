@@ -14,20 +14,23 @@ import {
 import {FormControl} from '@angular/forms';
 import {MatOption} from '@angular/material';
 import {filter, first} from 'rxjs/operators';
-import {SearchableSelectListComponent} from '../searchable-select-list/searchable-select-list.component';
-import {SearchableSelectOptionDirective} from '../../directives/searchable-select-option.directive';
+import {MatSearchableSelectListComponent} from '../mat-searchable-select-list/mat-searchable-select-list.component';
+import {MatSearchableSelectOptionDirective} from '../../directives/mat-searchable-select-option.directive';
 import {BehaviorSubject} from 'rxjs';
 
 @Component({
-	selector: 'searchable-select',
-	templateUrl: './searchable-select.component.html',
-	styleUrls: ['./searchable-select.component.scss']
+	selector: 'mat-searchable-select',
+	templateUrl: './mat-searchable-select.component.html',
+	styleUrls: ['./mat-searchable-select.component.scss']
 })
-export class SearchableSelectComponent implements OnInit, AfterViewInit, OnChanges {
+export class MatSearchableSelectComponent implements OnInit, AfterViewInit, OnChanges {
 
-	@ViewChild('hiddenOption', {static: false}) private hiddenOption: MatOption;
-	@ContentChild(SearchableSelectListComponent, {static: false}) private searchableSelectList: SearchableSelectListComponent;
-	@ContentChild(SearchableSelectOptionDirective, {static: false}) private searchableSelectOptionDirective: SearchableSelectOptionDirective;
+	@ViewChild('hiddenOption', {static: false})
+	private hiddenOption: MatOption;
+	@ContentChild(MatSearchableSelectListComponent, {static: false})
+	private searchableSelectList: MatSearchableSelectListComponent;
+	@ContentChild(MatSearchableSelectOptionDirective, {static: false})
+	private searchableSelectOptionDirective: MatSearchableSelectOptionDirective;
 
 	@Input('highlight')
 	set highlightSetter(value: boolean) {
@@ -106,7 +109,7 @@ export class SearchableSelectComponent implements OnInit, AfterViewInit, OnChang
 	public handleItemSelection(selectedItem: any, needsEmit: boolean = true) {
 		const previousValue = this.control.value;
 		this.itemSelecting.next(true);
-		this.control.setValue(selectedItem, {emitEvent: true});
+		this.control.setValue(selectedItem);
 		this.selectedItem = selectedItem;
 		setTimeout(() => {
 			this.hiddenOption.value = selectedItem;

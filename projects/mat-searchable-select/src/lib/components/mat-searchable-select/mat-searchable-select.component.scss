@@ -2,12 +2,12 @@
 	min-height: 60px;
 }
 
-.searchable-select__hidden-option {
+.mat-searchable-select__hidden-option {
 	display: none;
 }
 
 ::ng-deep {
-	.searchable-select-panel {
+	.mat-searchable-select-panel {
 		overflow: hidden !important;
 		max-height: unset !important;
 	}

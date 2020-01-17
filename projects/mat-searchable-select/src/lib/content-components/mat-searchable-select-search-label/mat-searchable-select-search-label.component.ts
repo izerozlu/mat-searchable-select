@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 
 @Component({
-	selector: 'searchable-select-search-label',
+	selector: 'mat-searchable-select-search-label',
 	template: '<ng-content></ng-content>'
 })
-export class SearchableSelectSearchLabelComponent implements OnInit {
+export class MatSearchableSelectSearchLabelComponent implements OnInit {
 
 	constructor() {
 	}

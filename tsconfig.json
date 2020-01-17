@@ -19,11 +19,11 @@
 			"dom"
 		],
 		"paths": {
-			"searchable-select": [
-				"dist/searchable-select"
+			"mat-searchable-select": [
+				"dist/mat-searchable-select"
 			],
-			"searchable-select/*": [
-				"dist/searchable-select/*"
+			"mat-searchable-select/*": [
+				"dist/mat-searchable-select/*"
 			]
 		}
 	}

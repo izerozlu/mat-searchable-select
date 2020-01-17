@@ -1,10 +1,10 @@
 import {AfterViewInit, Directive, ElementRef, Input} from '@angular/core';
 
 @Directive({
-	selector: '[searchable-select-highlight]'
+	selector: '[mat-searchable-select-highlight]'
 })
-export class SearchableSelectHighlightDirective implements AfterViewInit {
-	@Input('searchable-select-highlight') private isEnabled: boolean;
+export class MatSearchableSelectHighlightDirective implements AfterViewInit {
+	@Input('mat-searchable-select-highlight') private isEnabled: boolean;
 	@Input('highlight-query') private searchQuery: string;
 
 	private element: HTMLElement;
@@ -41,7 +41,7 @@ export class SearchableSelectHighlightDirective implements AfterViewInit {
 
 	private generateHighlightElement() {
 		const highlightElement: HTMLSpanElement = document.createElement('span');
-		highlightElement.classList.add('searchable-select-highlight');
+		highlightElement.classList.add('mat-searchable-select-highlight');
 		highlightElement.style.background = 'rgba(0, 0, 0, .06)';
 		highlightElement.style.borderRadius = '4px';
 		highlightElement.textContent = this.searchQuery;

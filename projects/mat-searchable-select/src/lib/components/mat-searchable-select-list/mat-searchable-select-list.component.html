@@ -1,8 +1,8 @@
-<mat-list class="searchable-select__list">
+<mat-list class="mat-searchable-select__list">
 	<mat-list-item *ngFor="let option of options"
 				   [highlight-query]="searchQuery"
-				   [searchable-select-highlight]="isHighlightEnabled"
-				   class="searchable-select__option"
+				   [mat-searchable-select-highlight]="isHighlightEnabled"
+				   class="mat-searchable-select__option"
 				   (click)="handleItemSelection(option)">
 		<ng-container *ngTemplateOutlet="templateRef; context: {option: option || {}}"></ng-container>
 	</mat-list-item>
