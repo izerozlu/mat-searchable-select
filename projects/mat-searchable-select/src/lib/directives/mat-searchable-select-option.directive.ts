@@ -1,7 +1,7 @@
-import {Directive, TemplateRef} from '@angular/core';
+import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({
-	selector: '[mat-searchable-select-option],[searchableSelectOption]'
+	selector: '[mat-searchable-select-option],[matSearchableSelectOption]'
 })
 export class MatSearchableSelectOptionDirective {
 

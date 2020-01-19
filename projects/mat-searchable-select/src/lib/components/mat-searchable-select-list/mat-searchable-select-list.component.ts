@@ -11,7 +11,7 @@ import {
 	TemplateRef,
 	ViewEncapsulation
 } from '@angular/core';
-import {MatSearchableSelectOptionDirective} from '../../directives/mat-searchable-select-option.directive';
+import { MatSearchableSelectOptionDirective } from '../../directives/mat-searchable-select-option.directive';
 
 @Component({
 	selector: 'mat-searchable-select-list',
@@ -20,30 +20,32 @@ import {MatSearchableSelectOptionDirective} from '../../directives/mat-searchabl
 	encapsulation: ViewEncapsulation.None
 })
 export class MatSearchableSelectListComponent implements OnChanges, AfterViewInit {
-	@ContentChild(MatSearchableSelectOptionDirective, {static: false})
-	private searchableSelectOptionDirective: MatSearchableSelectOptionDirective;
-
-	public searchQuery: string;
-	public options: any[];
-
-	@Output('item-selected') public itemSelected = new EventEmitter<any>();
-
-	public templateRef: TemplateRef<any>;
-	public isHighlightEnabled: boolean;
-	@Input('option-keys') private optionKeys: string | string[];
+	@ContentChild(MatSearchableSelectOptionDirective, { static: false })
+	private matSearchableSelectOptionDirective: MatSearchableSelectOptionDirective;
 
 	@Input('options')
 	set optionsSetter(options: any[]) {
-		this.options = [];
-		setTimeout(() => this.options = options);
+		this.options = options;
+		this.filteredOptions = [];
+		setTimeout(() => this.filteredOptions = options);
 	}
+	@Input('option-keys') private optionKeys: string | string[];
+	@Output('item-selected') public itemSelected = new EventEmitter<any>();
+
+
+	public searchQuery: string;
+	public filteredOptions: any[];
+	public options: any[];
+	public templateRef: TemplateRef<any>;
+	public isHighlightEnabled: boolean;
+
 
 	constructor(
 		private hostElementRef: ElementRef
 	) {
 	}
 
-	public ngOnChanges({options, optionKeys}: SimpleChanges): void {
+	public ngOnChanges({ options, optionKeys }: SimpleChanges): void {
 		if (optionKeys && optionKeys.currentValue && typeof optionKeys.currentValue === 'string') {
 			this.optionKeys = [optionKeys.currentValue];
 		}
@@ -54,7 +56,7 @@ export class MatSearchableSelectListComponent implements OnChanges, AfterViewIni
 
 	public ngAfterViewInit() {
 		this.calculateListHeight();
-		setTimeout(() => this.templateRef = this.searchableSelectOptionDirective.templateRef);
+		setTimeout(() => this.templateRef = this.matSearchableSelectOptionDirective.templateRef);
 	}
 
 	public handleItemSelection(selectedItem: any) {
