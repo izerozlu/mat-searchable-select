@@ -3,6 +3,7 @@ import {
 	Component,
 	ContentChild,
 	EventEmitter,
+	forwardRef,
 	Input,
 	OnChanges,
 	OnInit,
@@ -11,7 +12,7 @@ import {
 	TemplateRef,
 	ViewChild
 } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {MatOption} from '@angular/material';
 import {filter, first} from 'rxjs/operators';
 import {MatSearchableSelectListComponent} from '../mat-searchable-select-list/mat-searchable-select-list.component';
@@ -21,10 +22,16 @@ import {BehaviorSubject} from 'rxjs';
 @Component({
 	selector: 'mat-searchable-select',
 	templateUrl: './mat-searchable-select.component.html',
-	styleUrls: ['./mat-searchable-select.component.scss']
+	styleUrls: ['./mat-searchable-select.component.scss'],
+	providers: [
+		{
+			provide: NG_VALUE_ACCESSOR,
+			multi: true,
+			useExisting: forwardRef(() => MatSearchableSelectComponent),
+		}
+	]
 })
 export class MatSearchableSelectComponent implements OnInit, AfterViewInit, OnChanges {
-
 	@ViewChild('hiddenOption', {static: false})
 	private hiddenOption: MatOption;
 	@ContentChild(MatSearchableSelectListComponent, {static: false})
@@ -37,7 +44,7 @@ export class MatSearchableSelectComponent implements OnInit, AfterViewInit, OnCh
 		setTimeout(() => this.matSearchableSelectList.isHighlightEnabled = value !== false);
 	}
 
-	@Input('control') public control = new FormControl();
+	@Input('formControl') public formControl = new FormControl();
 	@Input('value') public value: any;
 	@Input('is-loading') public isLoading: boolean;
 
@@ -72,16 +79,28 @@ export class MatSearchableSelectComponent implements OnInit, AfterViewInit, OnCh
 		});
 	}
 
+	// Needed for FormControl usage.
+	public writeValue() {
+	}
+
+	// Needed for FormControl usage.
+	public registerOnChange() {
+	}
+
+	// Needed for FormControl usage.
+	public registerOnTouched() {
+	}
+
 	public ngOnChanges({value}: SimpleChanges): void {
-		if (value && value.currentValue && value.currentValue !== this.control.value) {
-			this.changedEventEmitter.emit({previousValue: this.control.value, nextValue: value.currentValue});
+		if (value && value.currentValue && value.currentValue !== this.formControl.value) {
+			this.changedEventEmitter.emit({previousValue: this.formControl.value, nextValue: value.currentValue});
 			if (this.itemSelecting.value === true) {
 				this.itemSelecting.pipe(filter((itemSelectionStatus => itemSelectionStatus === false)), first()).subscribe(() => {
-					this.control.setValue(value.currentValue);
+					this.formControl.setValue(value.currentValue);
 					setTimeout(() => this.selectValue(value.currentValue));
 				});
 			} else {
-				this.control.setValue(value.currentValue);
+				this.formControl.setValue(value.currentValue);
 				setTimeout(() => this.selectValue(value.currentValue));
 			}
 		}
@@ -94,9 +113,9 @@ export class MatSearchableSelectComponent implements OnInit, AfterViewInit, OnCh
 	}
 
 	public handleItemSelection(selectedItem: any, needsEmit: boolean = true) {
-		const previousValue = this.control.value;
+		const previousValue = this.formControl.value;
 		this.itemSelecting.next(true);
-		this.control.setValue(selectedItem);
+		this.formControl.setValue(selectedItem);
 		this.selectedItem = selectedItem;
 		setTimeout(() => {
 			this.selectValue(selectedItem);
@@ -132,8 +151,8 @@ export class MatSearchableSelectComponent implements OnInit, AfterViewInit, OnCh
 	}
 
 	private setSelectValue() {
-		if (this.control && this.control.value) {
-			const controlValue = this.control.value;
+		if (this.formControl && this.formControl.value) {
+			const controlValue = this.formControl.value;
 			this.selectedItem = controlValue;
 			this.selectValue(controlValue);
 		}
