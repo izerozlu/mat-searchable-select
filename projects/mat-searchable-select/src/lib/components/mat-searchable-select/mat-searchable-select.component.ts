@@ -11,12 +11,12 @@ import {
 	TemplateRef,
 	ViewChild
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { MatOption } from '@angular/material';
-import { filter, first } from 'rxjs/operators';
-import { MatSearchableSelectListComponent } from '../mat-searchable-select-list/mat-searchable-select-list.component';
-import { MatSearchableSelectOptionDirective } from '../../directives/mat-searchable-select-option.directive';
-import { BehaviorSubject } from 'rxjs';
+import {FormControl} from '@angular/forms';
+import {MatOption} from '@angular/material';
+import {filter, first} from 'rxjs/operators';
+import {MatSearchableSelectListComponent} from '../mat-searchable-select-list/mat-searchable-select-list.component';
+import {MatSearchableSelectOptionDirective} from '../../directives/mat-searchable-select-option.directive';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
 	selector: 'mat-searchable-select',
@@ -25,11 +25,11 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class MatSearchableSelectComponent implements OnInit, AfterViewInit, OnChanges {
 
-	@ViewChild('hiddenOption', { static: false })
+	@ViewChild('hiddenOption', {static: false})
 	private hiddenOption: MatOption;
-	@ContentChild(MatSearchableSelectListComponent, { static: false })
+	@ContentChild(MatSearchableSelectListComponent, {static: false})
 	private matSearchableSelectList: MatSearchableSelectListComponent;
-	@ContentChild(MatSearchableSelectOptionDirective, { static: false })
+	@ContentChild(MatSearchableSelectOptionDirective, {static: false})
 	private matSearchableSelectOptionDirective: MatSearchableSelectOptionDirective;
 
 	@Input('highlight')
@@ -72,20 +72,17 @@ export class MatSearchableSelectComponent implements OnInit, AfterViewInit, OnCh
 		});
 	}
 
-	public ngOnChanges({ value }: SimpleChanges): void {
+	public ngOnChanges({value}: SimpleChanges): void {
 		if (value && value.currentValue && value.currentValue !== this.control.value) {
+			this.changedEventEmitter.emit({previousValue: this.control.value, nextValue: value.currentValue});
 			if (this.itemSelecting.value === true) {
 				this.itemSelecting.pipe(filter((itemSelectionStatus => itemSelectionStatus === false)), first()).subscribe(() => {
 					this.control.setValue(value.currentValue);
-					setTimeout(() => {
-						this.selectValue(value.currentValue);
-					});
+					setTimeout(() => this.selectValue(value.currentValue));
 				});
 			} else {
 				this.control.setValue(value.currentValue);
-				setTimeout(() => {
-					this.selectValue(value.currentValue);
-				});
+				setTimeout(() => this.selectValue(value.currentValue));
 			}
 		}
 	}
@@ -106,11 +103,12 @@ export class MatSearchableSelectComponent implements OnInit, AfterViewInit, OnCh
 			this.itemSelecting.next(false);
 		});
 		if (needsEmit) {
-			this.changedEventEmitter.emit({ previousValue, nextValue: selectedItem });
+			this.changedEventEmitter.emit({previousValue, nextValue: selectedItem});
 		}
 	}
 
 	private selectValue(value: any) {
+		this.selectedItem = value;
 		this.hiddenOption.value = value;
 		this.hiddenOption._selectViaInteraction();
 	}
