@@ -1,13 +1,21 @@
 import {AfterViewInit, Directive, ElementRef, Input} from '@angular/core';
+import {BehaviorSubject} from "rxjs";
+import {filter} from "rxjs/operators";
 
 @Directive({
 	selector: '[mat-searchable-select-highlight]'
 })
 export class MatSearchableSelectHighlightDirective implements AfterViewInit {
 	@Input('mat-searchable-select-highlight') private isEnabled: boolean;
-	@Input('highlight-query') private searchQuery: string;
 
+	@Input('highlight-query')
+	set searchQuerySetter(value: string) {
+		this.searchQuery.next(value);
+	};
+
+	private defaultText: string;
 	private element: HTMLElement;
+	private searchQuery = new BehaviorSubject<string>('');
 
 	constructor(
 		private elementRef: ElementRef
@@ -16,27 +24,29 @@ export class MatSearchableSelectHighlightDirective implements AfterViewInit {
 	}
 
 	public ngAfterViewInit() {
-		if (this.isEnabled) {
-			this.highlightSearchQuery();
-		}
+		this.listenSearchQuery();
 	}
 
-	private highlightSearchQuery() {
-		const isSearchQueryPresent = this.element.innerText.includes(this.searchQuery);
-		if (isSearchQueryPresent) {
+	private listenSearchQuery() {
+		this.searchQuery.pipe(
+			filter(((searchQuery: string) => this.isEnabled && searchQuery && searchQuery.length > 0))
+		).subscribe((searchQuery: string) => {
 			const matListItemElement = this.element.childNodes[0];
 			const childNodes = matListItemElement.childNodes;
-			for (const childNodeIndex in childNodes) {
-				if (childNodes.hasOwnProperty(childNodeIndex)) {
-					const childNode = childNodes[childNodeIndex];
-					if (childNode.nodeType === Node.TEXT_NODE && childNode.textContent.includes(this.searchQuery)) {
-						const highlightElement = this.generateHighlightElement();
-						const splitNodeValues = childNode.nodeValue.split(this.searchQuery);
-						childNode.replaceWith(splitNodeValues[0], (highlightElement as Node), splitNodeValues[1]);
-					}
-				}
+			const textNode = Array.from(childNodes).filter((node: Node) => node.nodeType === Node.TEXT_NODE)[0];
+			const textContent = textNode.textContent;
+			if (!this.defaultText) {
+				this.defaultText = textContent;
+			} else if (this.element.querySelector('.mat-searchable-select-highlight')) {
+				textNode.nextSibling.remove();
+				textNode.nextSibling.remove();
 			}
-		}
+			if ((this.defaultText || textContent).includes(searchQuery)) {
+				const highlightElement = this.generateHighlightElement();
+				const splitNodes = (this.defaultText ? document.createTextNode(this.defaultText) : textNode).nodeValue.split(searchQuery);
+				textNode.replaceWith(splitNodes[0], highlightElement, splitNodes[1]);
+			}
+		})
 	}
 
 	private generateHighlightElement() {
@@ -44,7 +54,7 @@ export class MatSearchableSelectHighlightDirective implements AfterViewInit {
 		highlightElement.classList.add('mat-searchable-select-highlight');
 		highlightElement.style.background = 'rgba(0, 0, 0, .06)';
 		highlightElement.style.borderRadius = '4px';
-		highlightElement.textContent = this.searchQuery;
+		highlightElement.textContent = this.searchQuery.value;
 		return highlightElement;
 	}
 }
