@@ -16,7 +16,7 @@ Yet another searchable select box with [mat-select](https://material.angular.io/
 
 ## Demo
 
-[Features and Code Usage Demo](https://izerozlu.github.io/mat-searchable-select-examples/)
+[Features and Code Usage Demo](https://izerozlu.github.io/mat-searchable-select-demo/)
 
 ## Dependencies
 
