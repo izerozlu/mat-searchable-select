@@ -11,13 +11,13 @@ import {MatSearchableSelectListComponent} from './components/mat-searchable-sele
 import {MatSearchableSelectLabelComponent} from './content-components/mat-searchable-select-label/mat-searchable-select-label.component';
 // tslint:disable-next-line:max-line-length
 import {MatSearchableSelectSearchLabelComponent} from './content-components/mat-searchable-select-search-label/mat-searchable-select-search-label.component';
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatSelectModule} from "@angular/material/select";
-import {MatDividerModule} from "@angular/material/divider";
-import {MatListModule} from "@angular/material/list";
-import {MatIconModule} from "@angular/material/icon";
-import {MatInputModule} from "@angular/material/input";
-import {MatButtonModule} from "@angular/material/button";
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
+import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
 	declarations: [

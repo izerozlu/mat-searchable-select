@@ -1,12 +1,12 @@
 {
 	"name": "mat-searchable-select",
-	"version": "0.0.0",
+	"version": "1.0.1",
 	"scripts": {
 		"ng": "ng",
 		"build": "ng build",
-		"build:watch": "ng build --watch"
+		"build:watch": "ng build --watch",
+		"publish": "ng build && npm publish"
 	},
-	"private": true,
 	"dependencies": {
 		"@angular/animations": "~8.0.0",
 		"@angular/cdk": "~8.2.3",

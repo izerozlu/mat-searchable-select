@@ -1,6 +1,6 @@
 import {AfterViewInit, Directive, ElementRef, Input, OnDestroy} from '@angular/core';
-import {BehaviorSubject, Subscription} from "rxjs";
-import {filter} from "rxjs/operators";
+import {BehaviorSubject, Subscription} from 'rxjs';
+import {filter} from 'rxjs/operators';
 
 @Directive({
 	selector: '[mat-searchable-select-highlight]'
@@ -11,7 +11,7 @@ export class MatSearchableSelectHighlightDirective implements AfterViewInit, OnD
 	@Input('highlight-query')
 	set searchQuerySetter(value: string) {
 		this.searchQuery.next(value);
-	};
+	}
 
 	private defaultText: string;
 	private element: HTMLElement;

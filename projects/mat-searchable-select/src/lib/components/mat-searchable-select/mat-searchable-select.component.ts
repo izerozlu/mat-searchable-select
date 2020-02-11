@@ -27,7 +27,7 @@ import {BehaviorSubject} from 'rxjs';
 		{
 			provide: NG_VALUE_ACCESSOR,
 			multi: true,
-			useExisting: forwardRef(() => MatSearchableSelectComponent),
+			useExisting: forwardRef(() => MatSearchableSelectComponent)
 		}
 	]
 })
@@ -39,7 +39,7 @@ export class MatSearchableSelectComponent implements OnInit, AfterViewInit, OnCh
 	@ContentChild(MatSearchableSelectOptionDirective, {static: false})
 	private matSearchableSelectOptionDirective: MatSearchableSelectOptionDirective;
 
-	@Input('highlight')
+	@Input('mat-searchable-select-highlight')
 	set highlightSetter(value: boolean) {
 		setTimeout(() => this.matSearchableSelectList.isHighlightEnabled = value !== false);
 	}
