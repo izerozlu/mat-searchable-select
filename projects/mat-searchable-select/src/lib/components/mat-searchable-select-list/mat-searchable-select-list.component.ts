@@ -11,7 +11,7 @@ import {
 	TemplateRef,
 	ViewEncapsulation
 } from '@angular/core';
-import { MatSearchableSelectOptionDirective } from '../../directives/mat-searchable-select-option.directive';
+import {MatSearchableSelectOptionDirective} from '../../directives/mat-searchable-select-option.directive';
 
 @Component({
 	selector: 'mat-searchable-select-list',
@@ -20,7 +20,7 @@ import { MatSearchableSelectOptionDirective } from '../../directives/mat-searcha
 	encapsulation: ViewEncapsulation.None
 })
 export class MatSearchableSelectListComponent implements OnChanges, AfterViewInit {
-	@ContentChild(MatSearchableSelectOptionDirective, { static: false })
+	@ContentChild(MatSearchableSelectOptionDirective)
 	private matSearchableSelectOptionDirective: MatSearchableSelectOptionDirective;
 
 	@Input('options')
@@ -29,6 +29,7 @@ export class MatSearchableSelectListComponent implements OnChanges, AfterViewIni
 		this.filteredOptions = [];
 		setTimeout(() => this.filteredOptions = options);
 	}
+
 	@Input('option-keys') private optionKeys: string | string[];
 	@Output('item-selected') public itemSelected = new EventEmitter<any>();
 

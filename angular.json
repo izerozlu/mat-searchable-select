@@ -13,6 +13,11 @@
 					"options": {
 						"tsConfig": "projects/mat-searchable-select/tsconfig.lib.json",
 						"project": "projects/mat-searchable-select/ng-package.json"
+					},
+					"configurations": {
+						"production": {
+							"tsConfig": "projects/mat-searchable-select/tsconfig.lib.prod.json"
+						}
 					}
 				},
 				"lint": {
@@ -30,5 +35,8 @@
 			}
 		}
 	},
-	"defaultProject": "mat-searchable-select"
+	"defaultProject": "mat-searchable-select",
+	"cli": {
+		"analytics": "5de0ccfe-8d86-436e-83ca-f6025673ede4"
+	}
 }

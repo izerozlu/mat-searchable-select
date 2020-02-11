@@ -13,7 +13,7 @@ import {
 	ViewChild
 } from '@angular/core';
 import {FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
-import {MatOption} from '@angular/material';
+import {MatOption} from '@angular/material/core';
 import {filter, first} from 'rxjs/operators';
 import {MatSearchableSelectListComponent} from '../mat-searchable-select-list/mat-searchable-select-list.component';
 import {MatSearchableSelectOptionDirective} from '../../directives/mat-searchable-select-option.directive';
@@ -32,11 +32,11 @@ import {BehaviorSubject} from 'rxjs';
 	]
 })
 export class MatSearchableSelectComponent implements OnInit, AfterViewInit, OnChanges {
-	@ViewChild('hiddenOption', {static: false})
+	@ViewChild('hiddenOption')
 	private hiddenOption: MatOption;
-	@ContentChild(MatSearchableSelectListComponent, {static: false})
+	@ContentChild(MatSearchableSelectListComponent)
 	private matSearchableSelectList: MatSearchableSelectListComponent;
-	@ContentChild(MatSearchableSelectOptionDirective, {static: false})
+	@ContentChild(MatSearchableSelectOptionDirective)
 	private matSearchableSelectOptionDirective: MatSearchableSelectOptionDirective;
 
 	@Input('mat-searchable-select-highlight')
