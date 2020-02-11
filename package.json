@@ -4,8 +4,7 @@
 	"scripts": {
 		"ng": "ng",
 		"build": "ng build",
-		"build:watch": "ng build --watch",
-		"publish": "ng build && npm publish"
+		"build:watch": "ng build --watch"
 	},
 	"dependencies": {
 		"@angular/animations": "~8.0.0",
