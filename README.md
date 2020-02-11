@@ -12,7 +12,13 @@ Yet another searchable select box with [mat-select](https://material.angular.io/
 
 ## Installation
 
-`npm install mat-searchable-select --save`
+### < Angular 8
+
+`npm install --save mat-searchable-select@1.0.3`
+
+### Angular 9
+
+`npm install --save mat-searchable-select`
 
 ## Demo
 

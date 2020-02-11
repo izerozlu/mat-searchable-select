@@ -1,9 +1,9 @@
 {
 	"name": "mat-searchable-select",
-	"version": "1.0.3",
+	"version": "2.0.4",
 	"peerDependencies": {
-		"@angular/common": "^8.0.3",
-		"@angular/core": "^8.0.3",
-		"@angular/material": "8.2.3"
+		"@angular/common": "~9.0.0",
+		"@angular/core": "~9.0.0",
+		"@angular/material": "^9.0.0"
 	}
 }
