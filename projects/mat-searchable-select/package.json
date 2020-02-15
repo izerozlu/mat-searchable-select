@@ -1,6 +1,32 @@
 {
 	"name": "mat-searchable-select",
-	"version": "2.0.4",
+	"description": "Yet another searchable select for Material Components family. With a customization flavour.",
+	"author": {
+		"name": "İzer Özlü",
+		"email": "izerozlu@gmail.com",
+		"url": "https://twitter.com/IO_zlu"
+	},
+	"keywords": [
+		"@angular/material",
+		"material",
+		"angular",
+		"angular@8",
+		"angular 8",
+		"angular@9",
+		"angular 9",
+		"select",
+		"select box",
+		"searchable",
+		"searchable select",
+		"searchable select box",
+		"search select",
+		"search select box"
+	],
+	"repository": "github:izerozlu/mat-searchable-select",
+	"homepage": "https://github.com/izerozlu/mat-searchable-select",
+	"bugs": "https://github.com/izerozlu/mat-searchable-select/issues",
+	"license": "MIT",
+	"version": "2.0.5",
 	"peerDependencies": {
 		"@angular/common": "~9.0.0",
 		"@angular/core": "~9.0.0",

@@ -27,6 +27,3 @@ Yet another searchable select box with [mat-select](https://material.angular.io/
 ## Dependencies
 
 - `@angular/material`
-
-
-
