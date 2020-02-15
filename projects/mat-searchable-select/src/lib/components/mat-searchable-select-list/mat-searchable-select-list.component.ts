@@ -46,7 +46,7 @@ export class MatSearchableSelectListComponent implements OnChanges, AfterViewIni
 	) {
 	}
 
-	public ngOnChanges({ options, optionKeys }: SimpleChanges): void {
+	public ngOnChanges({options, optionKeys}: SimpleChanges): void {
 		if (optionKeys && optionKeys.currentValue && typeof optionKeys.currentValue === 'string') {
 			this.optionKeys = [optionKeys.currentValue];
 		}

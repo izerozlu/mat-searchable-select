@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {AbstractControl, FormControl} from '@angular/forms';
 
 @Component({
@@ -6,22 +6,10 @@ import {AbstractControl, FormControl} from '@angular/forms';
 	templateUrl: './clear-button.component.html',
 	styleUrls: ['./clear-button.component.scss']
 })
-export class ClearButtonComponent implements OnInit {
+export class ClearButtonComponent {
 
-	/**
-	 * Temizlenecek olan {@link FormControl}.
-	 */
 	@Input('control') private control: FormControl | AbstractControl;
 
-	constructor() {
-	}
-
-	public ngOnInit() {
-	}
-
-	/**
-	 * Bileşene geçirilmiş {@link control}'ü temizler.
-	 */
 	public clearControl() {
 		this.control.setValue('');
 		this.control.markAsPristine();

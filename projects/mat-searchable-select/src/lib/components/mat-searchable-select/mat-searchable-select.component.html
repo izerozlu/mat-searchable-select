@@ -1,26 +1,26 @@
 <mat-form-field>
-	<mat-label>
-		<ng-content select="mat-searchable-select-label"></ng-content>
-	</mat-label>
-	<mat-select class="mat-searchable-select"
-				panelClass="mat-searchable-select-panel"
-				[formControl]="formControl"
-				(opened)="handleMatSelectOpened()">
-		<mat-option #hiddenOption
-					[value]="selectedItem"
-					class="mat-searchable-select__hidden-option">
-			<ng-container *ngTemplateOutlet="optionTemplateRef; context: {option: selectedItem || {}}"></ng-container>
-		</mat-option>
-		<mat-searchable-select-search class="mat-searchable-select__search"
-									  [search-control]="searchFormControl"
-									  [is-loading]="isLoading">
-			<mat-searchable-select-search-label>
-				<ng-content select="mat-searchable-select-search-label"></ng-content>
-			</mat-searchable-select-search-label>
-		</mat-searchable-select-search>
-		<mat-divider class="mat-searchable-select__divider"></mat-divider>
-		<ng-content select="mat-searchable-select-list"></ng-content>
-	</mat-select>
+    <mat-label>
+        <ng-content select="mat-searchable-select-label"></ng-content>
+    </mat-label>
+    <mat-select class="mat-searchable-select"
+                panelClass="mat-searchable-select-panel"
+                [formControl]="formControl"
+                (opened)="handleMatSelectOpened()">
+        <mat-option #hiddenOption
+                    [value]="selectedItem"
+                    class="mat-searchable-select__hidden-option">
+            <ng-container *ngTemplateOutlet="optionTemplateRef; context: {option: selectedItem || {}}"></ng-container>
+        </mat-option>
+        <mat-searchable-select-search class="mat-searchable-select__search"
+                                      [search-control]="searchFormControl"
+                                      [is-loading]="isLoading">
+            <mat-searchable-select-search-label>
+                <ng-content select="mat-searchable-select-search-label"></ng-content>
+            </mat-searchable-select-search-label>
+        </mat-searchable-select-search>
+        <mat-divider class="mat-searchable-select__divider"></mat-divider>
+        <ng-content select="mat-searchable-select-list"></ng-content>
+    </mat-select>
 </mat-form-field>
 <span hidden>
 	<ng-content></ng-content>

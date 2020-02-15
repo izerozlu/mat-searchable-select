@@ -13,7 +13,4 @@ export class MatSearchableSelectSearchComponent {
 
 	@Output('search-changed') public searchChanged = new EventEmitter<string>();
 
-	constructor() {
-	}
-
 }
