@@ -6,6 +6,7 @@ import {filter} from 'rxjs/operators';
 	selector: '[mat-searchable-select-highlight]'
 })
 export class MatSearchableSelectHighlightDirective implements AfterViewInit, OnDestroy {
+
 	@Input('mat-searchable-select-highlight') private isEnabled: boolean;
 
 	@Input('highlight-query')

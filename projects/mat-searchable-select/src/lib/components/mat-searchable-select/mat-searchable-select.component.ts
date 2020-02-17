@@ -18,6 +18,7 @@ import {filter, first} from 'rxjs/operators';
 import {MatSearchableSelectListComponent} from '../mat-searchable-select-list/mat-searchable-select-list.component';
 import {MatSearchableSelectOptionDirective} from '../../directives/mat-searchable-select-option.directive';
 import {BehaviorSubject} from 'rxjs';
+import {MatSearchableSelectSearchComponent} from "../mat-searchable-select-search/mat-searchable-select-search.component";
 
 @Component({
 	selector: 'mat-searchable-select',
@@ -32,12 +33,14 @@ import {BehaviorSubject} from 'rxjs';
 	]
 })
 export class MatSearchableSelectComponent implements OnInit, AfterViewInit, OnChanges {
-	@ViewChild('hiddenOption')
-	private hiddenOption: MatOption;
 	@ContentChild(MatSearchableSelectListComponent)
 	private matSearchableSelectList: MatSearchableSelectListComponent;
 	@ContentChild(MatSearchableSelectOptionDirective)
 	private matSearchableSelectOptionDirective: MatSearchableSelectOptionDirective;
+	@ViewChild('hiddenOption')
+	private hiddenOption: MatOption;
+	@ViewChild(MatSearchableSelectSearchComponent)
+	private matSearchableSelectSearchComponent: MatSearchableSelectSearchComponent;
 
 	@Input('mat-searchable-select-highlight')
 	set highlightSetter(value: boolean) {
@@ -61,13 +64,9 @@ export class MatSearchableSelectComponent implements OnInit, AfterViewInit, OnCh
 
 	private itemSelecting = new BehaviorSubject(false);
 
-	constructor() {
-	}
-
 	public ngOnInit() {
 		this.listenSearchControl();
 	}
-
 
 	public ngAfterViewInit() {
 		setTimeout(() => {
@@ -110,6 +109,7 @@ export class MatSearchableSelectComponent implements OnInit, AfterViewInit, OnCh
 		const matSelectPanelElement = document.querySelector('.mat-select-panel') as HTMLElement;
 		matSelectPanelElement.style.overflow = 'hidden';
 		matSelectPanelElement.style.maxHeight = 'min-content';
+		this.matSearchableSelectSearchComponent.focusEventEmitter.emit();
 	}
 
 	public handleItemSelection(selectedItem: any, needsEmit: boolean = true) {

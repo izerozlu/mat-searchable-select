@@ -33,13 +33,11 @@ export class MatSearchableSelectListComponent implements OnChanges, AfterViewIni
 	@Input('option-keys') private optionKeys: string | string[];
 	@Output('item-selected') public itemSelected = new EventEmitter<any>();
 
-
 	public searchQuery: string;
 	public filteredOptions: any[];
 	public options: any[];
 	public templateRef: TemplateRef<any>;
 	public isHighlightEnabled: boolean;
-
 
 	constructor(
 		private hostElementRef: ElementRef

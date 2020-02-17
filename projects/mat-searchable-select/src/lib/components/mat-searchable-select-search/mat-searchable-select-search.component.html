@@ -4,8 +4,8 @@
 			<ng-content select="mat-searchable-select-search-label"></ng-content>
 		</mat-label>
 		<input class="search-form__input"
-			   autofocus
 			   type="text"
+			   #searchInput
 			   matInput
 			   [formControl]="searchControl"
 			   (keydown)="$event.stopPropagation()">
