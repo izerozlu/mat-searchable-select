@@ -2,10 +2,12 @@ import {
 	AfterViewInit,
 	Component,
 	ContentChild,
+	ElementRef,
 	EventEmitter,
 	forwardRef,
 	Input,
 	OnChanges,
+	OnDestroy,
 	OnInit,
 	Output,
 	SimpleChanges,
@@ -17,8 +19,11 @@ import {MatOption} from '@angular/material/core';
 import {filter, first} from 'rxjs/operators';
 import {MatSearchableSelectListComponent} from '../mat-searchable-select-list/mat-searchable-select-list.component';
 import {MatSearchableSelectOptionDirective} from '../../directives/mat-searchable-select-option.directive';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, fromEvent, merge, Subscription} from 'rxjs';
 import {MatSearchableSelectSearchComponent} from "../mat-searchable-select-search/mat-searchable-select-search.component";
+import {MatSelect} from "@angular/material/select";
+
+const ESCAPE = 'Escape';
 
 @Component({
 	selector: 'mat-searchable-select',
@@ -32,7 +37,7 @@ import {MatSearchableSelectSearchComponent} from "../mat-searchable-select-searc
 		}
 	]
 })
-export class MatSearchableSelectComponent implements OnInit, AfterViewInit, OnChanges {
+export class MatSearchableSelectComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
 	@ContentChild(MatSearchableSelectListComponent)
 	private matSearchableSelectList: MatSearchableSelectListComponent;
 	@ContentChild(MatSearchableSelectOptionDirective)
@@ -41,6 +46,8 @@ export class MatSearchableSelectComponent implements OnInit, AfterViewInit, OnCh
 	private hiddenOption: MatOption;
 	@ViewChild(MatSearchableSelectSearchComponent)
 	private matSearchableSelectSearchComponent: MatSearchableSelectSearchComponent;
+	@ViewChild(MatSelect)
+	private matSelect: MatSelect;
 
 	@Input('mat-searchable-select-highlight')
 	set highlightSetter(value: boolean) {
@@ -63,6 +70,12 @@ export class MatSearchableSelectComponent implements OnInit, AfterViewInit, OnCh
 	public searchFormControl = new FormControl(undefined);
 
 	private itemSelecting = new BehaviorSubject(false);
+	private subscriptions: Subscription[] = [];
+
+	constructor(
+		private elementRef: ElementRef
+	) {
+	}
 
 	public ngOnInit() {
 		this.listenSearchControl();
@@ -76,6 +89,11 @@ export class MatSearchableSelectComponent implements OnInit, AfterViewInit, OnCh
 			}
 			this.setSelectValue();
 		});
+		this.bindCloseShortcut();
+	}
+
+	public ngOnDestroy() {
+		this.subscriptions.forEach((subscription: Subscription) => subscription.unsubscribe());
 	}
 
 	// Needed for FormControl usage.
@@ -156,5 +174,16 @@ export class MatSearchableSelectComponent implements OnInit, AfterViewInit, OnCh
 			this.selectedItem = controlValue;
 			this.selectValue(controlValue);
 		}
+	}
+
+	private bindCloseShortcut() {
+		const closeEventEmitter = this.matSearchableSelectSearchComponent.matSearchableSelectListCloseEventEmitter;
+		const hostElement: HTMLElement = this.elementRef.nativeElement;
+		const subscription = merge(fromEvent(hostElement, 'keypress'), closeEventEmitter).subscribe((keyboardEvent: KeyboardEvent) => {
+			if (keyboardEvent.key.toLowerCase() === ESCAPE.toLowerCase()) {
+				this.matSelect.close();
+			}
+		});
+		this.subscriptions.push(subscription);
 	}
 }
