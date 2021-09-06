@@ -1,6 +1,6 @@
 # mat-searchable-select
 
-Yet another searchable select box with [mat-select](https://material.angular.io/components/select/overview) integration. 
+Yet another searchable select box with [mat-select](https://material.angular.io/components/select/overview) integration.
 
 ## Features
 
@@ -17,6 +17,10 @@ Yet another searchable select box with [mat-select](https://material.angular.io/
 `npm install --save mat-searchable-select@1.0.3`
 
 ### Angular 9
+
+`npm install --save mat-searchable-select@2.0.6`
+
+### Angular 10
 
 `npm install --save mat-searchable-select`
 
